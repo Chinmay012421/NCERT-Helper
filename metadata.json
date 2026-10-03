@@ -1,0 +1,9 @@
+{
+  "name": "ScholarPulse - Active Study & Mastery Suite",
+  "description": "An intelligent study sanctuary with Pomodoro focus sessions, spaced repetition flashcards, active recall quizzes, Feynman technique coach, and note synthesizers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
+
