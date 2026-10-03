@@ -26,7 +26,7 @@ export interface NcertSubjectData {
 }
 
 export interface NcertClassData {
-  classId: 'class-6' | 'class-7' | 'class-8' | 'class-9';
+  classId: 'class-6' | 'class-7' | 'class-8' | 'class-9' | 'class-10' | 'class-11' | 'class-12';
   className: string;
   subjects: NcertSubjectData[];
 }

@@ -164,7 +164,7 @@ export const NcertHelperView: React.FC<NcertHelperViewProps> = ({
           <div className="flex items-center gap-2 text-xs text-amber-400 font-semibold mb-2">
             <span>NCERT HELPER</span>
             <span aria-hidden="true">·</span>
-            <span>Classes 6, 7, 8, & 9</span>
+            <span>Classes 6 to 12</span>
             <span aria-hidden="true">·</span>
             <span>CBSE Curriculum 2026 Aligned</span>
           </div>
@@ -242,7 +242,7 @@ export const NcertHelperView: React.FC<NcertHelperViewProps> = ({
               />
               <div className="absolute left-0 mt-2 w-56 bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
                 <div className="px-3.5 py-1.5 text-[10px] font-brand font-bold uppercase tracking-wider text-amber-400">
-                  Switch Class (6 to 9)
+                  Switch Class (6 to 12)
                 </div>
                 <div className="py-1">
                   {NCERT_CLASSES.map((cls) => {

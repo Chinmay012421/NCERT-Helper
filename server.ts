@@ -46,8 +46,8 @@ async function startServer() {
 
     try {
       if (ai) {
-        const prompt = `You are an expert CBSE and NCERT Master Teacher specializing in Class 6 to 9 curriculum.
-Grade: ${classGrade || 'Class 9'}
+        const prompt = `You are an expert CBSE and NCERT Master Teacher specializing in Class 6 to 12 curriculum and Board Examinations.
+Grade: ${classGrade || 'Class 10'}
 Subject: ${subject || 'Science'}
 Chapter: ${chapter || 'General'}
 Question from NCERT Textbook / Exercise:

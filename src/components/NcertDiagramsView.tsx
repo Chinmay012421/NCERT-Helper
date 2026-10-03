@@ -24,7 +24,7 @@ export const NcertDiagramsView: React.FC = () => {
           <div className="flex items-center gap-2 font-brand text-xs text-amber-400 font-semibold mb-2 uppercase tracking-wider">
             <span>NCERT HIGH-YIELD DIAGRAMS</span>
             <span aria-hidden="true">·</span>
-            <span>Classes 6 to 9</span>
+            <span>Classes 6 to 12</span>
             <span aria-hidden="true">·</span>
             <span>3 & 5 Mark Exam Assured</span>
           </div>
@@ -32,7 +32,7 @@ export const NcertDiagramsView: React.FC = () => {
             Chapter-Wise Important Diagrams & Drawing Guides
           </h1>
           <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
-            In CBSE and State Board exams, science diagrams carry up to 15 marks. Master labeled anatomical structures, optical ray diagrams, and apparatus setups with step-by-step exam sketching tips.
+            In CBSE and State Board exams, science and biology diagrams carry up to 15 marks. Master labeled anatomical structures, optical ray diagrams, circuits, and apparatus setups with step-by-step exam sketching tips.
           </p>
         </div>
       </div>
@@ -52,6 +52,12 @@ export const NcertDiagramsView: React.FC = () => {
             <span className="font-extrabold text-amber-300 tracking-wide">
               {selectedClassId === 'all'
                 ? 'All Classes'
+                : selectedClassId === 'class-12'
+                ? 'Class 12'
+                : selectedClassId === 'class-11'
+                ? 'Class 11'
+                : selectedClassId === 'class-10'
+                ? 'Class 10'
                 : selectedClassId === 'class-9'
                 ? 'Class 9'
                 : selectedClassId === 'class-8'
@@ -72,11 +78,14 @@ export const NcertDiagramsView: React.FC = () => {
               />
               <div className="absolute left-0 mt-2 w-52 bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
                 <div className="px-3.5 py-1.5 text-[10px] font-brand font-bold uppercase tracking-wider text-amber-400">
-                  Filter by Grade
+                  Filter by Grade (6 to 12)
                 </div>
                 <div className="py-1">
                   {[
                     { id: 'all', label: 'All Classes' },
+                    { id: 'class-12', label: 'Class 12' },
+                    { id: 'class-11', label: 'Class 11' },
+                    { id: 'class-10', label: 'Class 10' },
                     { id: 'class-9', label: 'Class 9' },
                     { id: 'class-8', label: 'Class 8' },
                     { id: 'class-7', label: 'Class 7' },

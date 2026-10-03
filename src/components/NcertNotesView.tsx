@@ -174,7 +174,7 @@ ${notesData.lastMinuteRevisionRecap.map((r) => `- ${r}`).join('\n')}
             <Sparkles className="w-4 h-4" />
             <span>AI-POWERED NCERT COMPREHENSIVE REVISION</span>
             <span aria-hidden="true">·</span>
-            <span>Classes 6 to 9</span>
+            <span>Classes 6 to 12</span>
           </div>
           <h1 className="font-display font-bold text-xl sm:text-3xl lg:text-4xl tracking-tight text-white mb-2">
             Complete Chapter Notes & High-Scoring Summaries
@@ -214,7 +214,7 @@ ${notesData.lastMinuteRevisionRecap.map((r) => `- ${r}`).join('\n')}
               />
               <div className="absolute left-0 mt-2 w-56 bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
                 <div className="px-3.5 py-1.5 text-[10px] font-brand font-bold uppercase tracking-wider text-amber-400">
-                  Switch Class (6 to 9)
+                  Switch Class (6 to 12)
                 </div>
                 <div className="py-1">
                   {NCERT_CLASSES.map((cls) => {

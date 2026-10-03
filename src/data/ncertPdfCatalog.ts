@@ -11,7 +11,7 @@ export interface NcertPdfChapter {
 
 export interface NcertPdfBook {
   id: string;
-  classId: 'class-6' | 'class-7' | 'class-8' | 'class-9';
+  classId: 'class-6' | 'class-7' | 'class-8' | 'class-9' | 'class-10' | 'class-11' | 'class-12';
   className: string;
   subject: string;
   bookTitle: string;
@@ -360,6 +360,172 @@ export const NCERT_PDF_CATALOG: NcertPdfBook[] = [
         chapterSummary: 'Major nutrients in food: carbohydrates, proteins, fats, vitamins, and minerals. Tests for starch (iodine), protein (copper sulphate & caustic soda), and fat (oil patch). Balanced diet and deficiency diseases.',
         inTextTopics: ['What Do Different Food Items Contain?', 'Tests for Starch, Protein, and Fats', 'What Do Various Nutrients Do for Our Body?', 'Balanced Diet & Roughage', 'Deficiency Diseases (Scurvy, Beriberi, Rickets)'],
         keyExercises: ['Exercise Q1 to Q5: Major nutrients list, Iodine test for starch in boiled rice.'],
+      },
+    ],
+  },
+
+  // ================= CLASS 10 SCIENCE =================
+  {
+    id: 'pdf-c10-sci',
+    classId: 'class-10',
+    className: 'Class 10',
+    subject: 'Science',
+    bookTitle: 'Science — Textbook for Class X (NCERT Rationalized)',
+    officialBookCode: 'jesc1',
+    coverAccent: '#059669',
+    edition: '2024–2026 Latest Reprint',
+    totalChapters: 13,
+    officialPortalUrl: 'https://ncert.nic.in/textbook.php?jesc1=0-13',
+    chapters: [
+      {
+        id: 'pdf-c10-sci-ch1',
+        chapterNumber: 1,
+        title: 'Chemical Reactions and Equations',
+        pagesCount: 16,
+        pdfUrl: 'https://ncert.nic.in/textbook/pdf/jesc101.pdf',
+        chapterSummary: 'Chemical equations, balanced chemical equations, implications of a balanced chemical equation, types of chemical reactions: combination, decomposition, displacement, double displacement, precipitation, neutralization, oxidation and reduction, corrosion and rancidity.',
+        inTextTopics: ['Chemical Equations & Balancing', 'Types of Chemical Reactions', 'Have You Observed the Effects of Oxidation Reactions in Everyday Life?'],
+        keyExercises: ['Balancing chemical equations', 'Identify substance oxidized and reduced'],
+      },
+      {
+        id: 'pdf-c10-sci-ch2',
+        chapterNumber: 2,
+        title: 'Acids, Bases and Salts',
+        pagesCount: 22,
+        pdfUrl: 'https://ncert.nic.in/textbook/pdf/jesc102.pdf',
+        chapterSummary: 'Their definitions in terms of furnishing of H⁺ and OH⁻ ions, general properties, examples and uses, neutralization, concept of pH scale, importance of pH in everyday life; preparation and uses of Sodium Hydroxide, Bleaching powder, Baking soda, Washing soda and Plaster of Paris.',
+        inTextTopics: ['Understanding Chemical Properties of Acids & Bases', 'How Strong are Acid or Base Solutions?', 'More About Salts & Water of Crystallisation'],
+        keyExercises: ['Chlor-alkali process products', 'Preparation and properties of Plaster of Paris'],
+      },
+    ],
+  },
+
+  // ================= CLASS 10 MATHEMATICS =================
+  {
+    id: 'pdf-c10-math',
+    classId: 'class-10',
+    className: 'Class 10',
+    subject: 'Mathematics',
+    bookTitle: 'Mathematics — Textbook for Class X (NCERT Rationalized)',
+    officialBookCode: 'jemh1',
+    coverAccent: '#2563eb',
+    edition: '2024–2026 Latest Reprint',
+    totalChapters: 14,
+    officialPortalUrl: 'https://ncert.nic.in/textbook.php?jemh1=0-14',
+    chapters: [
+      {
+        id: 'pdf-c10-math-ch1',
+        chapterNumber: 1,
+        title: 'Real Numbers',
+        pagesCount: 12,
+        pdfUrl: 'https://ncert.nic.in/textbook/pdf/jemh101.pdf',
+        chapterSummary: 'The Fundamental Theorem of Arithmetic statements after reviewing work done earlier and after illustrating and motivating through examples, Proofs of irrationality of √2, √3, √5.',
+        inTextTopics: ['The Fundamental Theorem of Arithmetic', 'Revisiting Irrational Numbers'],
+        keyExercises: ['Exercise 1.1: Prime factorisation and HCF/LCM', 'Exercise 1.2: Prove √5 is irrational'],
+      },
+    ],
+  },
+
+  // ================= CLASS 11 PHYSICS =================
+  {
+    id: 'pdf-c11-phy',
+    classId: 'class-11',
+    className: 'Class 11',
+    subject: 'Physics',
+    bookTitle: 'Physics Part I & II — Textbook for Class XI',
+    officialBookCode: 'keph1',
+    coverAccent: '#0284c7',
+    edition: '2024–2026 Latest Reprint',
+    totalChapters: 14,
+    officialPortalUrl: 'https://ncert.nic.in/textbook.php?keph1=0-8',
+    chapters: [
+      {
+        id: 'pdf-c11-phy-ch1',
+        chapterNumber: 1,
+        title: 'Units and Measurements',
+        pagesCount: 20,
+        pdfUrl: 'https://ncert.nic.in/textbook/pdf/keph101.pdf',
+        chapterSummary: 'Need for measurement: Units of measurement; systems of units; SI units, fundamental and derived units. Significant figures. Dimensions of physical quantities, dimensional analysis and its applications.',
+        inTextTopics: ['The International System of Units', 'Measurement of Length, Mass, Time', 'Dimensions of Physical Quantities & Dimensional Equations'],
+        keyExercises: ['Checking correctness of physical equations', 'Deriving relationships between quantities'],
+      },
+    ],
+  },
+
+  // ================= CLASS 11 CHEMISTRY =================
+  {
+    id: 'pdf-c11-chem',
+    classId: 'class-11',
+    className: 'Class 11',
+    subject: 'Chemistry',
+    bookTitle: 'Chemistry Part I & II — Textbook for Class XI',
+    officialBookCode: 'kech1',
+    coverAccent: '#059669',
+    edition: '2024–2026 Latest Reprint',
+    totalChapters: 9,
+    officialPortalUrl: 'https://ncert.nic.in/textbook.php?kech1=0-6',
+    chapters: [
+      {
+        id: 'pdf-c11-chem-ch1',
+        chapterNumber: 1,
+        title: 'Some Basic Concepts of Chemistry',
+        pagesCount: 22,
+        pdfUrl: 'https://ncert.nic.in/textbook/pdf/kech101.pdf',
+        chapterSummary: 'Importance and scope of chemistry. Nature of matter, laws of chemical combination, Dalton atomic theory. Concepts of elements, atoms and molecules. Atomic and molecular masses, mole concept and molar mass, percentage composition, empirical and molecular formula, chemical reactions, stoichiometry and calculations based on stoichiometry.',
+        inTextTopics: ['Importance of Chemistry', 'Nature of Matter & Properties', 'Uncertainty in Measurement', 'Laws of Chemical Combinations', 'Dalton Atomic Theory', 'Atomic and Molecular Masses', 'Mole Concept & Molar Masses'],
+        keyExercises: ['Stoichiometric calculation of products', 'Empirical formula determination'],
+      },
+    ],
+  },
+
+  // ================= CLASS 12 PHYSICS =================
+  {
+    id: 'pdf-c12-phy',
+    classId: 'class-12',
+    className: 'Class 12',
+    subject: 'Physics',
+    bookTitle: 'Physics Part I & II — Textbook for Class XII',
+    officialBookCode: 'leph1',
+    coverAccent: '#0284c7',
+    edition: '2024–2026 Latest Reprint',
+    totalChapters: 14,
+    officialPortalUrl: 'https://ncert.nic.in/textbook.php?leph1=0-8',
+    chapters: [
+      {
+        id: 'pdf-c12-phy-ch1',
+        chapterNumber: 1,
+        title: 'Electric Charges and Fields',
+        pagesCount: 28,
+        pdfUrl: 'https://ncert.nic.in/textbook/pdf/leph101.pdf',
+        chapterSummary: 'Electric Charges; Conservation of charge, Coulomb law-force between two point charges, forces between multiple charges; superposition principle and continuous charge distribution. Electric field, electric field due to a point charge, electric field lines, electric dipole, electric field due to a dipole, torque on a dipole in uniform electric field. Electric flux, statement of Gauss theorem and its applications.',
+        inTextTopics: ['Electric Charge & Conductors/Insulators', 'Basic Properties of Electric Charge', 'Coulomb Law', 'Forces between Multiple Charges', 'Electric Field & Field Lines', 'Electric Flux', 'Electric Dipole', 'Gauss Law & Applications'],
+        keyExercises: ['Superposition principle problems', 'Electric flux through Gaussian surfaces'],
+      },
+    ],
+  },
+
+  // ================= CLASS 12 CHEMISTRY =================
+  {
+    id: 'pdf-c12-chem',
+    classId: 'class-12',
+    className: 'Class 12',
+    subject: 'Chemistry',
+    bookTitle: 'Chemistry Part I & II — Textbook for Class XII',
+    officialBookCode: 'lech1',
+    coverAccent: '#059669',
+    edition: '2024–2026 Latest Reprint',
+    totalChapters: 10,
+    officialPortalUrl: 'https://ncert.nic.in/textbook.php?lech1=0-5',
+    chapters: [
+      {
+        id: 'pdf-c12-chem-ch1',
+        chapterNumber: 1,
+        title: 'Solutions',
+        pagesCount: 26,
+        pdfUrl: 'https://ncert.nic.in/textbook/pdf/lech101.pdf',
+        chapterSummary: 'Types of solutions, expression of concentration of solutions of solids in liquids, solubility of gases in liquids, solid solutions, Raoult law, colligative properties - relative lowering of vapour pressure, elevation of boiling point, depression of freezing point, osmotic pressure, determination of molecular masses using colligative properties, abnormal molecular mass, Van\'t Hoff factor.',
+        inTextTopics: ['Types of Solutions', 'Expressing Concentration of Solutions', 'Solubility of Gases & Henry Law', 'Vapour Pressure of Liquid Solutions', 'Ideal and Non-ideal Solutions', 'Colligative Properties & Molar Mass Determination', 'Abnormal Molar Masses & van\'t Hoff Factor'],
+        keyExercises: ['Calculations of molar mass from osmotic pressure', 'Elevation of boiling point numericals'],
       },
     ],
   },

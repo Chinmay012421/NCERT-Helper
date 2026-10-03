@@ -42,7 +42,7 @@ export const NcertPdfLibraryView: React.FC = () => {
             <span aria-hidden="true">·</span>
             <span>Rationalized 2024–2026 Syllabus</span>
             <span aria-hidden="true">·</span>
-            <span>Class 6 to 9</span>
+            <span>Class 6 to 12</span>
           </div>
           <h1 className="font-display font-bold text-xl sm:text-3xl lg:text-4xl tracking-tight text-white mb-2">
             NCERT Textbook PDFs & Chapter In-Text Reader
@@ -66,7 +66,19 @@ export const NcertPdfLibraryView: React.FC = () => {
           >
             <BookOpen className="w-4 h-4 text-amber-400" />
             <span className="font-extrabold text-amber-300 tracking-wide">
-              {selectedClassId === 'class-9' ? 'Class 9' : selectedClassId === 'class-8' ? 'Class 8' : selectedClassId === 'class-7' ? 'Class 7' : 'Class 6'}
+              {selectedClassId === 'class-12'
+                ? 'Class 12'
+                : selectedClassId === 'class-11'
+                ? 'Class 11'
+                : selectedClassId === 'class-10'
+                ? 'Class 10'
+                : selectedClassId === 'class-9'
+                ? 'Class 9'
+                : selectedClassId === 'class-8'
+                ? 'Class 8'
+                : selectedClassId === 'class-7'
+                ? 'Class 7'
+                : 'Class 6'}
             </span>
             <ChevronDown className={`w-4 h-4 text-stone-400 transition-transform duration-200 ${isClassDropdownOpen ? 'rotate-180 text-amber-300' : ''}`} />
           </button>
@@ -80,10 +92,13 @@ export const NcertPdfLibraryView: React.FC = () => {
               />
               <div className="absolute left-0 mt-2 w-52 bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
                 <div className="px-3.5 py-1.5 text-[10px] font-brand font-bold uppercase tracking-wider text-amber-400">
-                  Switch Class (6 to 9)
+                  Switch Class (6 to 12)
                 </div>
                 <div className="py-1">
                   {[
+                    { id: 'class-12', label: 'Class 12' },
+                    { id: 'class-11', label: 'Class 11' },
+                    { id: 'class-10', label: 'Class 10' },
                     { id: 'class-9', label: 'Class 9' },
                     { id: 'class-8', label: 'Class 8' },
                     { id: 'class-7', label: 'Class 7' },

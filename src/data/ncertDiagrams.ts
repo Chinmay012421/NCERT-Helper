@@ -9,14 +9,14 @@ export interface DiagramLabel {
 
 export interface NcertDiagramItem {
   id: string;
-  classId: 'class-6' | 'class-7' | 'class-8' | 'class-9';
+  classId: 'class-6' | 'class-7' | 'class-8' | 'class-9' | 'class-10' | 'class-11' | 'class-12';
   className: string;
   subject: string;
   chapterNumber: number;
   chapterTitle: string;
   diagramTitle: string;
   imageUrl?: string;
-  svgType?: 'stomata' | 'neuron' | 'circuit' | 'pinhole' | 'sublimation' | 'triangle';
+  svgType?: 'stomata' | 'neuron' | 'circuit' | 'pinhole' | 'sublimation' | 'triangle' | 'heart' | 'nephron' | 'dna';
   labels: DiagramLabel[];
   examMarks: '3 Marks' | '5 Marks';
   drawingGuide: string[];
@@ -262,6 +262,187 @@ export const NCERT_DIAGRAMS: NcertDiagramItem[] = [
     frequentQuestions: [
       'Draw a ray diagram showing image formation in a pinhole camera.',
       'Why is the image formed in a pinhole camera inverted?',
+    ],
+  },
+
+  // ================= CLASS 10 =================
+  {
+    id: 'diag-c10-human-heart',
+    classId: 'class-10',
+    className: 'Class 10',
+    subject: 'Science (Life Processes)',
+    chapterNumber: 5,
+    chapterTitle: 'Life Processes',
+    diagramTitle: 'Sectional View of the Human Heart & Circulation',
+    svgType: 'heart',
+    examMarks: '5 Marks',
+    labels: [
+      { name: 'Right Atrium', description: 'Receives deoxygenated blood from the upper and lower vena cava.' },
+      { name: 'Right Ventricle', description: 'Pumps deoxygenated blood to the lungs via the pulmonary artery.' },
+      { name: 'Left Atrium', description: 'Receives oxygen-rich blood from lungs via pulmonary veins.' },
+      { name: 'Left Ventricle', description: 'Thick muscular chamber pumping oxygenated blood to the body via aorta.' },
+      { name: 'Interventricular Septum', description: 'Thick muscular wall preventing mixing of oxygenated and deoxygenated blood.' },
+      { name: 'Aorta', description: 'Main systemic artery carrying high-pressure oxygenated blood to all organs.' },
+      { name: 'Pulmonary Artery', description: 'Only artery carrying deoxygenated blood from heart to lungs.' },
+    ],
+    drawingGuide: [
+      'Step 1: Sketch a tilted pear or heart shape divided vertically into right and left halves.',
+      'Step 2: Draw the upper receiving chambers (thin-walled atria) and lower pumping chambers (ventricles).',
+      'Step 3: Make the left ventricular wall significantly thicker than the right.',
+      'Step 4: Draw the arching aorta exiting the left ventricle and pulmonary trunk from the right ventricle.',
+      'Step 5: Label atria, ventricles, septum, valves, and add arrows showing double circulation path.',
+    ],
+    frequentQuestions: [
+      'Draw a sectional view of human heart and label: Aorta, Pulmonary Artery, Left Ventricle, Septum.',
+      'Why is the separation of right and left sides of the heart useful in mammals and birds?',
+      'Why are the walls of ventricles thicker than atria?',
+    ],
+  },
+  {
+    id: 'diag-c10-nephron',
+    classId: 'class-10',
+    className: 'Class 10',
+    subject: 'Science (Life Processes)',
+    chapterNumber: 5,
+    chapterTitle: 'Life Processes',
+    diagramTitle: 'Structure of a Nephron (Functional Excretory Unit)',
+    svgType: 'nephron',
+    examMarks: '5 Marks',
+    labels: [
+      { name: 'Bowman Capsule', description: 'Double-walled cup surrounding the glomerulus where ultrafiltration occurs.' },
+      { name: 'Glomerulus', description: 'Tuft of high-pressure capillaries fed by afferent arteriole filtering blood plasma.' },
+      { name: 'Proximal Convoluted Tubule (PCT)', description: 'Region where 70–80% of electrolytes, water, glucose, and amino acids are reabsorbed.' },
+      { name: 'Loop of Henle', description: 'Hairpin loop (descending and ascending limbs) maintaining osmoregulatory gradient.' },
+      { name: 'Distal Convoluted Tubule (DCT)', description: 'Site of conditional reabsorption of Na⁺ and water under aldosterone/ADH.' },
+      { name: 'Collecting Duct', description: 'Receives urine from several nephrons and carries it to the renal pelvis.' },
+    ],
+    drawingGuide: [
+      'Step 1: Draw a cup-shaped Bowman capsule at the top left containing a coiled glomerulus knot.',
+      'Step 2: Continue the neck into an extensively coiled Proximal Convoluted Tubule (PCT).',
+      'Step 3: Draw a deep U-shaped hairpin loop representing Henle loop into the medulla.',
+      'Step 4: Continue upward into a second coiled region (DCT) and connect to a vertical Collecting Duct.',
+      'Step 5: Label all 6 principal functional regions neatly on the right.',
+    ],
+    frequentQuestions: [
+      'Draw the structure of a nephron and label: Bowman capsule, Glomerulus, Henle loop, Collecting duct.',
+      'Describe the three major steps of urine formation in the nephron.',
+    ],
+  },
+  {
+    id: 'diag-c10-ray-concave',
+    classId: 'class-10',
+    className: 'Class 10',
+    subject: 'Science (Physics)',
+    chapterNumber: 9,
+    chapterTitle: 'Light – Reflection and Refraction',
+    diagramTitle: 'Ray Diagram: Concave Mirror (Object between C and F)',
+    examMarks: '3 Marks',
+    labels: [
+      { name: 'Object (AB)', description: 'Placed between Center of Curvature (C) and Principal Focus (F).' },
+      { name: 'Principal Axis', description: 'Straight line passing through Pole P, Focus F, and Center of Curvature C.' },
+      { name: 'Incident Parallel Ray', description: 'Parallel to principal axis; reflects passing through focus F.' },
+      { name: 'Focal Incident Ray', description: 'Passes through focus F; reflects parallel to principal axis.' },
+      { name: 'Image (A\'B\')', description: 'Formed beyond C; Real, Inverted, and Magnified (enlarged).' },
+    ],
+    drawingGuide: [
+      'Step 1: Use a ruler to draw a straight horizontal line for the Principal Axis.',
+      'Step 2: Draw the concave mirror curve and hatch the silvered convex back.',
+      'Step 3: Mark Pole P, Focus F at 3 cm, and Center of Curvature C at 6 cm (R = 2f).',
+      'Step 4: Erect object arrow AB between C and F.',
+      'Step 5: Trace Ray 1 (parallel to axis → reflects through F) with arrows.',
+      'Step 6: Trace Ray 2 (through F → reflects parallel) and mark intersection point A\' beyond C.',
+    ],
+    frequentQuestions: [
+      'Draw a ray diagram for image formation by a concave mirror when object is placed between C and F.',
+      'State the position, nature and relative size of the image formed.',
+    ],
+  },
+
+  // ================= CLASS 11 =================
+  {
+    id: 'diag-c11-chloroplast',
+    classId: 'class-11',
+    className: 'Class 11',
+    subject: 'Biology',
+    chapterNumber: 8,
+    chapterTitle: 'Cell: The Unit of Life',
+    diagramTitle: 'Ultrastructure of a Chloroplast (Photosynthetic Organelle)',
+    examMarks: '5 Marks',
+    labels: [
+      { name: 'Outer Membrane', description: 'Permeable outer lipid bilayer enclosing the organelle.' },
+      { name: 'Inner Membrane', description: 'Selectively permeable barrier housing specialized translocon proteins.' },
+      { name: 'Stroma', description: 'Gel-like matrix containing RuBisCO enzyme, circular 70S DNA, and ribosomes (Dark reaction site).' },
+      { name: 'Thylakoid', description: 'Flattened membranous sacs containing chlorophyll pigments and photosystems (PS I & II).' },
+      { name: 'Granum (pl. Grana)', description: 'Stacks of disc-like thylakoids where the light-dependent reactions take place.' },
+      { name: 'Stroma Lamellae', description: 'Flat membranous tubules connecting adjacent grana stacks.' },
+    ],
+    drawingGuide: [
+      'Step 1: Draw a neat double-membrane oval structure.',
+      'Step 2: Inside, draw several stacks of circular coins representing thylakoids (grana).',
+      'Step 3: Connect the grana stacks with tubular bridges called stroma lamellae.',
+      'Step 4: Shading the surrounding matrix space as the stroma.',
+      'Step 5: Add tiny circular loops for chloroplast DNA and granules for 70S ribosomes.',
+    ],
+    frequentQuestions: [
+      'Draw a labeled diagram of the ultrastructure of a chloroplast.',
+      'Where do the light and dark reactions of photosynthesis take place within the chloroplast?',
+    ],
+  },
+
+  // ================= CLASS 12 =================
+  {
+    id: 'diag-c12-antibody',
+    classId: 'class-12',
+    className: 'Class 12',
+    subject: 'Biology',
+    chapterNumber: 7,
+    chapterTitle: 'Human Health and Disease',
+    diagramTitle: 'Structure of an Antibody Molecule (H₂L₂ Monomer)',
+    examMarks: '3 Marks',
+    labels: [
+      { name: 'Antigen-Binding Site (Paratope)', description: 'Variable N-terminal region formed by V_H and V_L domains that locks with epitope.' },
+      { name: 'Light Chains (L)', description: 'Two shorter polypeptide chains of ~220 amino acids each.' },
+      { name: 'Heavy Chains (H)', description: 'Two longer polypeptide chains of ~440 amino acids each.' },
+      { name: 'Disulfide Bonds (-S-S-)', description: 'Covalent linkages holding heavy and light chains into a flexible Y-shaped quaternary structure.' },
+      { name: 'Constant Region (Fc)', description: 'C-terminal region determining the isotype class (IgG, IgA, IgM, IgE, IgD).' },
+    ],
+    drawingGuide: [
+      'Step 1: Draw two identical parallel central long lines representing the heavy chains, branching into a Y shape at top.',
+      'Step 2: Draw two shorter outer lines representing the light chains parallel to the arms of the Y.',
+      'Step 3: Draw small horizontal bridges representing interchain disulfide (-S-S-) bonds.',
+      'Step 4: Mark the tips of both arms as Antigen-Binding Sites.',
+      'Step 5: Label Variable regions (V_H, V_L) and Constant regions (C_H, C_L).',
+    ],
+    frequentQuestions: [
+      'Draw a neat labeled diagram of an antibody molecule (H₂L₂).',
+      'Why is an antibody molecule represented as H₂L₂?',
+      'Which part of the antibody binds specifically to an antigen?',
+    ],
+  },
+  {
+    id: 'diag-c12-blastocyst',
+    classId: 'class-12',
+    className: 'Class 12',
+    subject: 'Biology',
+    chapterNumber: 2,
+    chapterTitle: 'Human Reproduction',
+    diagramTitle: 'Structure of a Human Blastocyst (Pre-Implantation Stage)',
+    examMarks: '3 Marks',
+    labels: [
+      { name: 'Trophoblast', description: 'Outer single layer of epithelial cells that attaches to endometrium and forms placenta.' },
+      { name: 'Inner Cell Mass (Embryoblast)', description: 'Cluster of pluripotent stem cells that differentiates into the embryo proper.' },
+      { name: 'Blastocoel', description: 'Fluid-filled central cavity providing space for embryonic differentiation.' },
+      { name: 'Zona Pellucida (Hatching)', description: 'Glycoprotein shell that prevents ectopic implantation until hatching in uterine cavity.' },
+    ],
+    drawingGuide: [
+      'Step 1: Draw a neat outer circular boundary lined with small cuboidal cells (trophoblast).',
+      'Step 2: At one pole, cluster a compact bunch of cells representing the Inner Cell Mass.',
+      'Step 3: Label the empty internal space as the blastocyst cavity or blastocoel.',
+      'Step 4: Indicate the embryonic pole (with inner cell mass) and abembryonic pole.',
+    ],
+    frequentQuestions: [
+      'Draw a labeled diagram of a human blastocyst.',
+      'Differentiate between the functions of trophoblast and inner cell mass.',
     ],
   },
 ];

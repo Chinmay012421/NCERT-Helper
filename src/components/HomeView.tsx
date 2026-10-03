@@ -92,7 +92,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             <div className="flex flex-wrap items-center gap-2 font-brand text-xs font-semibold uppercase tracking-wider text-amber-400">
               <span>NCERT HELPER</span>
               <span aria-hidden="true">·</span>
-              <span>Classes 6 to 9 Study Sanctuary</span>
+              <span>Classes 6 to 12 Study Sanctuary</span>
               <span aria-hidden="true">·</span>
               <span>Created by Chinmay Epili</span>
             </div>
@@ -152,6 +152,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     onChange={(e) => setQuickClass(e.target.value)}
                     className="w-full text-xs font-semibold border border-stone-300 rounded-lg px-3 py-2 bg-stone-50 text-stone-800 focus:outline-none focus:ring-1 focus:ring-amber-400"
                   >
+                    <option value="Class 12">Class 12</option>
+                    <option value="Class 11">Class 11</option>
+                    <option value="Class 10">Class 10</option>
                     <option value="Class 9">Class 9</option>
                     <option value="Class 8">Class 8</option>
                     <option value="Class 7">Class 7</option>
@@ -165,7 +168,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     onChange={(e) => setQuickSubject(e.target.value)}
                     className="w-full text-xs font-semibold border border-stone-300 rounded-lg px-3 py-2 bg-stone-50 text-stone-800 focus:outline-none focus:ring-1 focus:ring-amber-400"
                   >
-                    <option value="Science">Science</option>
+                    <option value="Science">Science (PCB / General)</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Biology">Biology</option>
                     <option value="Mathematics">Mathematics</option>
                     <option value="Social Science">Social Science</option>
                     <option value="English">English</option>
