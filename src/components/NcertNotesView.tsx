@@ -16,7 +16,8 @@ import {
   RotateCw,
   Bookmark,
   CheckCircle2,
-  ArrowRight
+  ArrowRight,
+  Layers
 } from 'lucide-react';
 
 interface NcertNotesViewProps {
@@ -58,6 +59,7 @@ export const NcertNotesView: React.FC<NcertNotesViewProps> = ({
   // Class selection state with dropdown
   const [selectedClassId, setSelectedClassId] = useState<string>(initialClassId);
   const [isClassDropdownOpen, setIsClassDropdownOpen] = useState<boolean>(false);
+  const [isSubjectDropdownOpen, setIsSubjectDropdownOpen] = useState<boolean>(false);
   const currentClass: NcertClassData = NCERT_CLASSES.find((c) => c.classId === selectedClassId) || NCERT_CLASSES[0];
 
   // Subject selection state
@@ -185,23 +187,28 @@ ${notesData.lastMinuteRevisionRecap.map((r) => `- ${r}`).join('\n')}
         </div>
       </div>
 
-      {/* Grade Selector Dropdown & Subject Filters */}
-      <div className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-4 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4">
+      {/* Grade Selector Dropdown & Subject Selector Dropdown */}
+      <div className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-4 shadow-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 sm:gap-4">
         {/* Class Dropdown Selector */}
-        <div className="relative shrink-0">
-          <div className="text-[11px] font-semibold text-stone-500 mb-1 flex items-center gap-1.5 md:hidden">
+        <div className="relative shrink-0 w-full sm:w-auto">
+          <div className="text-[11px] font-semibold text-stone-500 mb-1 flex items-center gap-1.5 sm:hidden">
             <BookOpen className="w-3.5 h-3.5 text-amber-500" />
             <span>Select Grade / Standard:</span>
           </div>
           <button
             type="button"
-            onClick={() => setIsClassDropdownOpen((prev) => !prev)}
-            className="flex items-center gap-2.5 px-3.5 py-2 bg-stone-900 hover:bg-stone-800 text-white font-brand text-xs sm:text-sm font-bold rounded-lg border border-stone-800 shadow-xs transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            onClick={() => {
+              setIsClassDropdownOpen((prev) => !prev);
+              setIsSubjectDropdownOpen(false);
+            }}
+            className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2.5 px-3.5 py-2.5 sm:py-2 bg-stone-900 hover:bg-stone-800 text-white font-brand text-xs sm:text-sm font-bold rounded-lg border border-stone-800 shadow-xs transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
             aria-haspopup="listbox"
             aria-expanded={isClassDropdownOpen}
           >
-            <BookOpen className="w-4 h-4 text-amber-400" />
-            <span className="font-extrabold text-amber-300 tracking-wide">{currentClass.className}</span>
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-amber-400 shrink-0" />
+              <span className="font-extrabold text-amber-300 tracking-wide">{currentClass.className}</span>
+            </div>
             <ChevronDown className={`w-4 h-4 text-stone-400 transition-transform duration-200 ${isClassDropdownOpen ? 'rotate-180 text-amber-300' : ''}`} />
           </button>
 
@@ -212,11 +219,11 @@ ${notesData.lastMinuteRevisionRecap.map((r) => `- ${r}`).join('\n')}
                 className="fixed inset-0 z-20 cursor-default"
                 onClick={() => setIsClassDropdownOpen(false)}
               />
-              <div className="absolute left-0 mt-2 w-56 bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
+              <div className="absolute left-0 mt-2 w-full sm:w-60 max-w-[calc(100vw-2rem)] bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
                 <div className="px-3.5 py-1.5 text-[10px] font-brand font-bold uppercase tracking-wider text-amber-400">
                   Switch Class (6 to 12)
                 </div>
-                <div className="py-1">
+                <div className="py-1 max-h-72 overflow-y-auto">
                   {NCERT_CLASSES.map((cls) => {
                     const isActive = selectedClassId === cls.classId;
                     return (
@@ -246,24 +253,68 @@ ${notesData.lastMinuteRevisionRecap.map((r) => `- ${r}`).join('\n')}
           )}
         </div>
 
-        {/* Subject Pill Filter */}
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 w-full md:w-auto md:flex-wrap">
-          {currentClass.subjects.map((sub) => {
-            const isSubActive = selectedSubjectId === sub.id;
-            return (
-              <button
-                key={sub.id}
-                onClick={() => handleSubjectChange(sub.id)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-md border transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                  isSubActive
-                    ? 'bg-amber-100 border-amber-300 text-amber-900 font-bold shadow-xs'
-                    : 'bg-white border-stone-200 text-stone-600 hover:border-stone-300 hover:text-stone-900'
-                }`}
-              >
-                {sub.name}
-              </button>
-            );
-          })}
+        {/* Subject Dropdown Selector (Styled Exactly Like Class Dropdown) */}
+        <div className="relative shrink-0 w-full sm:w-auto">
+          <div className="text-[11px] font-semibold text-stone-500 mb-1 flex items-center gap-1.5 sm:hidden">
+            <Layers className="w-3.5 h-3.5 text-amber-500" />
+            <span>Select Subject:</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setIsSubjectDropdownOpen((prev) => !prev);
+              setIsClassDropdownOpen(false);
+            }}
+            className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2.5 px-3.5 py-2.5 sm:py-2 bg-stone-900 hover:bg-stone-800 text-white font-brand text-xs sm:text-sm font-bold rounded-lg border border-stone-800 shadow-xs transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
+            aria-haspopup="listbox"
+            aria-expanded={isSubjectDropdownOpen}
+          >
+            <div className="flex items-center gap-2">
+              <Layers className="w-4 h-4 text-amber-400 shrink-0" />
+              <span className="font-extrabold text-amber-300 tracking-wide">{currentSubject.name}</span>
+            </div>
+            <ChevronDown className={`w-4 h-4 text-stone-400 transition-transform duration-200 ${isSubjectDropdownOpen ? 'rotate-180 text-amber-300' : ''}`} />
+          </button>
+
+          {isSubjectDropdownOpen && (
+            <>
+              {/* Click outside backdrop */}
+              <div
+                className="fixed inset-0 z-20 cursor-default"
+                onClick={() => setIsSubjectDropdownOpen(false)}
+              />
+              <div className="absolute left-0 sm:left-auto mt-2 w-full sm:w-64 max-w-[calc(100vw-2rem)] bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
+                <div className="px-3.5 py-1.5 text-[10px] font-brand font-bold uppercase tracking-wider text-amber-400">
+                  Select {currentClass.className} Subject
+                </div>
+                <div className="py-1 max-h-72 overflow-y-auto">
+                  {currentClass.subjects.map((sub) => {
+                    const isActive = selectedSubjectId === sub.id;
+                    return (
+                      <button
+                        key={sub.id}
+                        onClick={() => {
+                          handleSubjectChange(sub.id);
+                          setIsSubjectDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-left transition-colors cursor-pointer ${
+                          isActive
+                            ? 'bg-amber-400/20 text-amber-300 font-bold'
+                            : 'text-stone-300 hover:bg-stone-800 hover:text-white'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="font-brand font-bold text-sm">{sub.name}</span>
+                          <span className="text-[10px] text-stone-400 font-normal">· {sub.chapters.length} Chapters</span>
+                        </div>
+                        {isActive && <Check className="w-4 h-4 text-amber-400" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -289,30 +340,42 @@ ${notesData.lastMinuteRevisionRecap.map((r) => `- ${r}`).join('\n')}
           </button>
 
           {isMobileChapterListOpen && (
-            <div className="mt-3 pt-3 border-t border-stone-100 max-h-72 overflow-y-auto space-y-1">
-              {filteredChapters.map((ch) => {
-                const isSelected = ch.id === selectedChapterId;
-                return (
-                  <button
-                    key={ch.id}
-                    onClick={() => {
-                      setSelectedChapterId(ch.id);
-                      setIsMobileChapterListOpen(false);
-                    }}
-                    className={`w-full p-2.5 rounded-lg border text-left text-xs transition-colors cursor-pointer flex items-center justify-between ${
-                      isSelected
-                        ? 'border-amber-400 bg-amber-50 text-stone-900 font-bold'
-                        : 'border-stone-100 hover:bg-stone-50 text-stone-700'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <span className="font-mono text-amber-700 text-[11px] shrink-0">Ch {ch.chapterNumber}</span>
-                      <span className="truncate">{ch.title}</span>
-                    </div>
-                    {isSelected && <Check className="w-3.5 h-3.5 text-amber-600 shrink-0 ml-1" />}
-                  </button>
-                );
-              })}
+            <div className="mt-3 pt-3 border-t border-stone-100 space-y-2">
+              <div className="relative">
+                <Search className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-2.5" />
+                <input
+                  type="text"
+                  value={chapterSearch}
+                  onChange={(e) => setChapterSearch(e.target.value)}
+                  placeholder="Search chapter title or number..."
+                  className="w-full text-xs bg-stone-50 border border-stone-200 rounded-lg pl-8 pr-3 py-2 text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                />
+              </div>
+              <div className="max-h-72 overflow-y-auto space-y-1">
+                {filteredChapters.map((ch) => {
+                  const isSelected = ch.id === selectedChapterId;
+                  return (
+                    <button
+                      key={ch.id}
+                      onClick={() => {
+                        setSelectedChapterId(ch.id);
+                        setIsMobileChapterListOpen(false);
+                      }}
+                      className={`w-full p-2.5 rounded-lg border text-left text-xs transition-colors cursor-pointer flex items-center justify-between ${
+                        isSelected
+                          ? 'border-amber-400 bg-amber-50 text-stone-900 font-bold'
+                          : 'border-stone-100 hover:bg-stone-50 text-stone-700'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="font-mono text-amber-700 text-[11px] shrink-0">Ch {ch.chapterNumber}</span>
+                        <span className="truncate">{ch.title}</span>
+                      </div>
+                      {isSelected && <Check className="w-3.5 h-3.5 text-amber-600 shrink-0 ml-1" />}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>

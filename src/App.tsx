@@ -319,7 +319,7 @@ function AppContent() {
       </main>
 
       {/* Editorial Footer */}
-      <footer className="border-t border-stone-200 bg-white py-6 text-center text-xs text-stone-500">
+      <footer className="border-t border-stone-200 bg-white pt-6 pb-24 md:pb-6 text-center text-xs text-stone-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <span className="font-semibold text-stone-800">NCERT HELPER</span>
@@ -327,7 +327,7 @@ function AppContent() {
             <span>Created & Developed by <strong className="text-stone-900 font-bold">Chinmay Epili</strong></span>
           </div>
           <div>
-            Classes 6 to 9 Verified Solutions · Diagrams Studio · Rationalized PDFs
+            Classes 6 to 12 Verified Solutions · High-Yield Diagrams · Rationalized PDFs
           </div>
         </div>
       </footer>

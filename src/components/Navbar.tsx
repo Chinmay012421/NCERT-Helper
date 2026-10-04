@@ -66,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </header>
 
       {/* Mobile Phone Bottom Navigation Bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-stone-950/95 border-t border-stone-800/80 backdrop-blur-lg px-1.5 py-1.5 flex items-center justify-around shadow-2xl">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-stone-950/95 border-t border-stone-800/90 backdrop-blur-xl px-1 pt-1.5 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))] flex items-center justify-around shadow-2xl">
         {navLinks.map((item) => {
           const isActive = activeTab === item.id;
           const Icon = item.icon;
@@ -74,13 +74,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`flex flex-col items-center justify-center flex-1 py-1 transition-colors rounded-lg cursor-pointer ${
+              className={`flex flex-col items-center justify-center flex-1 min-h-[48px] py-1 transition-all rounded-lg cursor-pointer select-none active:scale-95 ${
                 isActive
-                  ? 'text-amber-400 font-bold'
+                  ? 'text-amber-400 font-bold bg-stone-900/60'
                   : 'text-stone-400 hover:text-stone-200'
               }`}
             >
-              <Icon className={`w-4 h-4 mb-1 ${isActive ? 'text-amber-400 stroke-[2.5]' : 'text-stone-400'}`} />
+              <Icon className={`w-4 h-4 mb-1 transition-transform ${isActive ? 'text-amber-400 stroke-[2.5] scale-110' : 'text-stone-400'}`} />
               <span className="text-[10px] tracking-tight font-medium leading-none">
                 {item.id === 'ncert' ? 'Solutions' : item.id === 'ncert-diagrams' ? 'Diagrams' : item.label}
               </span>

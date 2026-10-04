@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { NCERT_DIAGRAMS, NcertDiagramItem, DiagramLabel } from '../data/ncertDiagrams';
-import { Award, BookOpen, Check, ChevronDown, Copy, Eye, EyeOff, Layers, PenTool, Sparkles } from 'lucide-react';
+import { Award, BookOpen, Check, ChevronDown, Copy, Eye, EyeOff, Layers, PenTool, Sparkles, Search } from 'lucide-react';
 
 export const NcertDiagramsView: React.FC = () => {
   const [selectedClassId, setSelectedClassId] = useState<string>('all');
   const [isClassDropdownOpen, setIsClassDropdownOpen] = useState<boolean>(false);
   const [isMobileDiagramListOpen, setIsMobileDiagramListOpen] = useState<boolean>(false);
+  const [diagramSearch, setDiagramSearch] = useState<string>('');
   const [selectedDiagramId, setSelectedDiagramId] = useState<string>(NCERT_DIAGRAMS[0].id);
   const [hideLabelsForPractice, setHideLabelsForPractice] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<'labels' | 'drawing-guide' | 'questions'>('labels');
@@ -38,34 +39,36 @@ export const NcertDiagramsView: React.FC = () => {
       </div>
 
       {/* Class Filter Bar */}
-      <div className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-4 shadow-xs flex flex-wrap items-center justify-between gap-3 sm:gap-4">
+      <div className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-4 shadow-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
         {/* Class Dropdown Selector */}
-        <div className="relative shrink-0">
+        <div className="relative shrink-0 w-full sm:w-auto">
           <button
             type="button"
             onClick={() => setIsClassDropdownOpen((prev) => !prev)}
-            className="flex items-center gap-2.5 px-3.5 py-2 bg-stone-900 hover:bg-stone-800 text-white font-brand text-xs sm:text-sm font-bold rounded-lg border border-stone-800 shadow-xs transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2.5 px-3.5 py-2.5 sm:py-2 bg-stone-900 hover:bg-stone-800 text-white font-brand text-xs sm:text-sm font-bold rounded-lg border border-stone-800 shadow-xs transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
             aria-haspopup="listbox"
             aria-expanded={isClassDropdownOpen}
           >
-            <Layers className="w-4 h-4 text-amber-400" />
-            <span className="font-extrabold text-amber-300 tracking-wide">
-              {selectedClassId === 'all'
-                ? 'All Classes'
-                : selectedClassId === 'class-12'
-                ? 'Class 12'
-                : selectedClassId === 'class-11'
-                ? 'Class 11'
-                : selectedClassId === 'class-10'
-                ? 'Class 10'
-                : selectedClassId === 'class-9'
-                ? 'Class 9'
-                : selectedClassId === 'class-8'
-                ? 'Class 8'
-                : selectedClassId === 'class-7'
-                ? 'Class 7'
-                : 'Class 6'}
-            </span>
+            <div className="flex items-center gap-2">
+              <Layers className="w-4 h-4 text-amber-400 shrink-0" />
+              <span className="font-extrabold text-amber-300 tracking-wide">
+                {selectedClassId === 'all'
+                  ? 'All Classes'
+                  : selectedClassId === 'class-12'
+                  ? 'Class 12'
+                  : selectedClassId === 'class-11'
+                  ? 'Class 11'
+                  : selectedClassId === 'class-10'
+                  ? 'Class 10'
+                  : selectedClassId === 'class-9'
+                  ? 'Class 9'
+                  : selectedClassId === 'class-8'
+                  ? 'Class 8'
+                  : selectedClassId === 'class-7'
+                  ? 'Class 7'
+                  : 'Class 6'}
+              </span>
+            </div>
             <ChevronDown className={`w-4 h-4 text-stone-400 transition-transform duration-200 ${isClassDropdownOpen ? 'rotate-180 text-amber-300' : ''}`} />
           </button>
 
@@ -76,11 +79,11 @@ export const NcertDiagramsView: React.FC = () => {
                 className="fixed inset-0 z-20 cursor-default"
                 onClick={() => setIsClassDropdownOpen(false)}
               />
-              <div className="absolute left-0 mt-2 w-52 bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
+              <div className="absolute left-0 mt-2 w-full sm:w-56 max-w-[calc(100vw-2rem)] bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
                 <div className="px-3.5 py-1.5 text-[10px] font-brand font-bold uppercase tracking-wider text-amber-400">
                   Filter by Grade (6 to 12)
                 </div>
-                <div className="py-1">
+                <div className="py-1 max-h-72 overflow-y-auto">
                   {[
                     { id: 'all', label: 'All Classes' },
                     { id: 'class-12', label: 'Class 12' },
@@ -123,9 +126,9 @@ export const NcertDiagramsView: React.FC = () => {
         {/* Practice Mode Toggle */}
         <button
           onClick={() => setHideLabelsForPractice(!hideLabelsForPractice)}
-          className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg border transition-colors cursor-pointer ${
+          className={`w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 text-xs font-semibold rounded-lg border transition-colors cursor-pointer min-h-[44px] ${
             hideLabelsForPractice
-              ? 'bg-amber-100 border-amber-400 text-amber-900'
+              ? 'bg-amber-100 border-amber-400 text-amber-900 font-bold'
               : 'bg-white border-stone-200 text-stone-700 hover:bg-stone-50'
           }`}
         >
@@ -150,7 +153,7 @@ export const NcertDiagramsView: React.FC = () => {
           <button
             type="button"
             onClick={() => setIsMobileDiagramListOpen((prev) => !prev)}
-            className="w-full flex items-center justify-between text-left cursor-pointer"
+            className="w-full flex items-center justify-between text-left cursor-pointer min-h-[44px]"
           >
             <div className="flex items-center gap-2.5 min-w-0">
               <span className="font-mono text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 shrink-0">
@@ -165,30 +168,48 @@ export const NcertDiagramsView: React.FC = () => {
           </button>
 
           {isMobileDiagramListOpen && (
-            <div className="mt-3 pt-3 border-t border-stone-100 max-h-72 overflow-y-auto space-y-1">
-              {filteredDiagrams.map((diag) => {
-                const isSelected = diag.id === currentDiagram.id;
-                return (
-                  <button
-                    key={diag.id}
-                    onClick={() => {
-                      setSelectedDiagramId(diag.id);
-                      setIsMobileDiagramListOpen(false);
-                    }}
-                    className={`w-full p-2.5 rounded-lg border text-left text-xs transition-colors cursor-pointer flex items-center justify-between ${
-                      isSelected
-                        ? 'border-amber-400 bg-amber-50 text-stone-900 font-bold'
-                        : 'border-stone-100 hover:bg-stone-50 text-stone-700'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <span className="font-mono text-amber-700 text-[11px] shrink-0">{diag.className}</span>
-                      <span className="truncate">{diag.diagramTitle}</span>
-                    </div>
-                    {isSelected && <Check className="w-3.5 h-3.5 text-amber-600 shrink-0 ml-1" />}
-                  </button>
-                );
-              })}
+            <div className="mt-3 pt-3 border-t border-stone-100 space-y-2">
+              <div className="relative">
+                <Search className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-2.5" />
+                <input
+                  type="text"
+                  value={diagramSearch}
+                  onChange={(e) => setDiagramSearch(e.target.value)}
+                  placeholder="Search diagram by name or organ..."
+                  className="w-full text-xs bg-stone-50 border border-stone-200 rounded-lg pl-8 pr-3 py-2 text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                />
+              </div>
+              <div className="max-h-72 overflow-y-auto space-y-1">
+                {filteredDiagrams
+                  .filter((diag) =>
+                    diag.diagramTitle.toLowerCase().includes(diagramSearch.toLowerCase()) ||
+                    diag.chapterTitle.toLowerCase().includes(diagramSearch.toLowerCase())
+                  )
+                  .map((diag) => {
+                    const isSelected = diag.id === currentDiagram.id;
+                    return (
+                      <button
+                        key={diag.id}
+                        onClick={() => {
+                          setSelectedDiagramId(diag.id);
+                          setIsMobileDiagramListOpen(false);
+                          setDiagramSearch('');
+                        }}
+                        className={`w-full p-2.5 rounded-lg border text-left text-xs transition-colors cursor-pointer flex items-center justify-between min-h-[44px] ${
+                          isSelected
+                            ? 'border-amber-400 bg-amber-50 text-stone-900 font-bold'
+                            : 'border-stone-100 hover:bg-stone-50 text-stone-700'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span className="font-mono text-amber-700 text-[11px] shrink-0">{diag.className}</span>
+                          <span className="truncate">{diag.diagramTitle}</span>
+                        </div>
+                        {isSelected && <Check className="w-3.5 h-3.5 text-amber-600 shrink-0 ml-1" />}
+                      </button>
+                    );
+                  })}
+              </div>
             </div>
           )}
         </div>

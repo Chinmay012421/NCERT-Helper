@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { NCERT_PDF_CATALOG, NcertPdfBook, NcertPdfChapter } from '../data/ncertPdfCatalog';
-import { BookOpen, Download, ExternalLink, FileText, CheckCircle2, ChevronRight, ChevronDown, Check, Layers, Sparkles } from 'lucide-react';
+import { BookOpen, Download, ExternalLink, FileText, CheckCircle2, ChevronRight, ChevronDown, Check, Layers, Sparkles, Search } from 'lucide-react';
 
 export const NcertPdfLibraryView: React.FC = () => {
   const [selectedClassId, setSelectedClassId] = useState<string>('class-9');
   const [isClassDropdownOpen, setIsClassDropdownOpen] = useState<boolean>(false);
+  const [isBookDropdownOpen, setIsBookDropdownOpen] = useState<boolean>(false);
   const [isMobileChapterListOpen, setIsMobileChapterListOpen] = useState<boolean>(false);
+  const [chapterSearch, setChapterSearch] = useState<string>('');
 
   const filteredBooks = NCERT_PDF_CATALOG.filter((b) => b.classId === selectedClassId);
   const [selectedBookId, setSelectedBookId] = useState<string>(filteredBooks[0]?.id || NCERT_PDF_CATALOG[0].id);
@@ -54,32 +56,41 @@ export const NcertPdfLibraryView: React.FC = () => {
       </div>
 
       {/* Class & Book Selection Toolbar */}
-      <div className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-4 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+      <div className="bg-white border border-stone-200 rounded-xl p-3.5 sm:p-4 shadow-xs flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-3 sm:gap-4">
         {/* Class Dropdown Selector */}
-        <div className="relative shrink-0">
+        <div className="relative shrink-0 w-full sm:w-auto">
+          <div className="text-[11px] font-semibold text-stone-500 mb-1 flex items-center gap-1.5 sm:hidden">
+            <BookOpen className="w-3.5 h-3.5 text-amber-500" />
+            <span>Select Grade / Standard:</span>
+          </div>
           <button
             type="button"
-            onClick={() => setIsClassDropdownOpen((prev) => !prev)}
-            className="flex items-center gap-2.5 px-3.5 py-2 bg-stone-900 hover:bg-stone-800 text-white font-brand text-xs sm:text-sm font-bold rounded-lg border border-stone-800 shadow-xs transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            onClick={() => {
+              setIsClassDropdownOpen((prev) => !prev);
+              setIsBookDropdownOpen(false);
+            }}
+            className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2.5 px-3.5 py-2.5 sm:py-2 bg-stone-900 hover:bg-stone-800 text-white font-brand text-xs sm:text-sm font-bold rounded-lg border border-stone-800 shadow-xs transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
             aria-haspopup="listbox"
             aria-expanded={isClassDropdownOpen}
           >
-            <BookOpen className="w-4 h-4 text-amber-400" />
-            <span className="font-extrabold text-amber-300 tracking-wide">
-              {selectedClassId === 'class-12'
-                ? 'Class 12'
-                : selectedClassId === 'class-11'
-                ? 'Class 11'
-                : selectedClassId === 'class-10'
-                ? 'Class 10'
-                : selectedClassId === 'class-9'
-                ? 'Class 9'
-                : selectedClassId === 'class-8'
-                ? 'Class 8'
-                : selectedClassId === 'class-7'
-                ? 'Class 7'
-                : 'Class 6'}
-            </span>
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-amber-400 shrink-0" />
+              <span className="font-extrabold text-amber-300 tracking-wide">
+                {selectedClassId === 'class-12'
+                  ? 'Class 12'
+                  : selectedClassId === 'class-11'
+                  ? 'Class 11'
+                  : selectedClassId === 'class-10'
+                  ? 'Class 10'
+                  : selectedClassId === 'class-9'
+                  ? 'Class 9'
+                  : selectedClassId === 'class-8'
+                  ? 'Class 8'
+                  : selectedClassId === 'class-7'
+                  ? 'Class 7'
+                  : 'Class 6'}
+              </span>
+            </div>
             <ChevronDown className={`w-4 h-4 text-stone-400 transition-transform duration-200 ${isClassDropdownOpen ? 'rotate-180 text-amber-300' : ''}`} />
           </button>
 
@@ -90,11 +101,11 @@ export const NcertPdfLibraryView: React.FC = () => {
                 className="fixed inset-0 z-20 cursor-default"
                 onClick={() => setIsClassDropdownOpen(false)}
               />
-              <div className="absolute left-0 mt-2 w-52 bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
+              <div className="absolute left-0 mt-2 w-full sm:w-56 max-w-[calc(100vw-2rem)] bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
                 <div className="px-3.5 py-1.5 text-[10px] font-brand font-bold uppercase tracking-wider text-amber-400">
                   Switch Class (6 to 12)
                 </div>
-                <div className="py-1">
+                <div className="py-1 max-h-72 overflow-y-auto">
                   {[
                     { id: 'class-12', label: 'Class 12' },
                     { id: 'class-11', label: 'Class 11' },
@@ -129,24 +140,68 @@ export const NcertPdfLibraryView: React.FC = () => {
           )}
         </div>
 
-        {/* Subject Book Selector */}
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 w-full sm:w-auto sm:flex-wrap">
-          {filteredBooks.map((b) => {
-            const isBookActive = b.id === currentBook.id;
-            return (
-              <button
-                key={b.id}
-                onClick={() => handleBookChange(b.id)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-md border transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                  isBookActive
-                    ? 'bg-amber-100 border-amber-300 text-amber-900 font-bold shadow-xs'
-                    : 'bg-white border-stone-200 text-stone-600 hover:border-stone-300 hover:text-stone-900'
-                }`}
-              >
-                {b.subject}
-              </button>
-            );
-          })}
+        {/* Subject Book Dropdown Selector (Styled Exactly Like Class Dropdown) */}
+        <div className="relative shrink-0 w-full sm:w-auto">
+          <div className="text-[11px] font-semibold text-stone-500 mb-1 flex items-center gap-1.5 sm:hidden">
+            <Layers className="w-3.5 h-3.5 text-amber-500" />
+            <span>Select Subject Book:</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setIsBookDropdownOpen((prev) => !prev);
+              setIsClassDropdownOpen(false);
+            }}
+            className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2.5 px-3.5 py-2.5 sm:py-2 bg-stone-900 hover:bg-stone-800 text-white font-brand text-xs sm:text-sm font-bold rounded-lg border border-stone-800 shadow-xs transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 min-h-[44px]"
+            aria-haspopup="listbox"
+            aria-expanded={isBookDropdownOpen}
+          >
+            <div className="flex items-center gap-2">
+              <Layers className="w-4 h-4 text-amber-400 shrink-0" />
+              <span className="font-extrabold text-amber-300 tracking-wide">{currentBook.subject}</span>
+            </div>
+            <ChevronDown className={`w-4 h-4 text-stone-400 transition-transform duration-200 ${isBookDropdownOpen ? 'rotate-180 text-amber-300' : ''}`} />
+          </button>
+
+          {isBookDropdownOpen && (
+            <>
+              {/* Click outside backdrop */}
+              <div
+                className="fixed inset-0 z-20 cursor-default"
+                onClick={() => setIsBookDropdownOpen(false)}
+              />
+              <div className="absolute left-0 sm:left-auto mt-2 w-full sm:w-64 max-w-[calc(100vw-2rem)] bg-stone-900 border border-stone-700/80 rounded-xl shadow-xl py-1.5 z-30 divide-y divide-stone-800">
+                <div className="px-3.5 py-1.5 text-[10px] font-brand font-bold uppercase tracking-wider text-amber-400">
+                  Select {currentBook.className} Subject Book
+                </div>
+                <div className="py-1 max-h-72 overflow-y-auto">
+                  {filteredBooks.map((b) => {
+                    const isActive = b.id === currentBook.id;
+                    return (
+                      <button
+                        key={b.id}
+                        onClick={() => {
+                          handleBookChange(b.id);
+                          setIsBookDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-left transition-colors cursor-pointer ${
+                          isActive
+                            ? 'bg-amber-400/20 text-amber-300 font-bold'
+                            : 'text-stone-300 hover:bg-stone-800 hover:text-white'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="font-brand font-bold text-sm">{b.subject}</span>
+                          <span className="text-[10px] text-stone-400 font-normal">· {b.chapters.length} Chapters</span>
+                        </div>
+                        {isActive && <Check className="w-4 h-4 text-amber-400" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -157,7 +212,7 @@ export const NcertPdfLibraryView: React.FC = () => {
           <button
             type="button"
             onClick={() => setIsMobileChapterListOpen((prev) => !prev)}
-            className="w-full flex items-center justify-between text-left cursor-pointer"
+            className="w-full flex items-center justify-between text-left cursor-pointer min-h-[44px]"
           >
             <div className="flex items-center gap-2.5 min-w-0">
               <span className="font-mono text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 shrink-0">
@@ -172,30 +227,48 @@ export const NcertPdfLibraryView: React.FC = () => {
           </button>
 
           {isMobileChapterListOpen && (
-            <div className="mt-3 pt-3 border-t border-stone-100 max-h-72 overflow-y-auto space-y-1">
-              {currentBook.chapters.map((ch) => {
-                const isSelected = ch.id === currentChapter?.id;
-                return (
-                  <button
-                    key={ch.id}
-                    onClick={() => {
-                      setSelectedChapterId(ch.id);
-                      setIsMobileChapterListOpen(false);
-                    }}
-                    className={`w-full p-2.5 rounded-lg border text-left text-xs transition-colors cursor-pointer flex items-center justify-between ${
-                      isSelected
-                        ? 'border-amber-400 bg-amber-50 text-stone-900 font-bold'
-                        : 'border-stone-100 hover:bg-stone-50 text-stone-700'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <span className="font-mono text-amber-700 text-[11px] shrink-0">Ch {ch.chapterNumber}</span>
-                      <span className="truncate">{ch.title}</span>
-                    </div>
-                    {isSelected && <Check className="w-3.5 h-3.5 text-amber-600 shrink-0 ml-1" />}
-                  </button>
-                );
-              })}
+            <div className="mt-3 pt-3 border-t border-stone-100 space-y-2">
+              <div className="relative">
+                <Search className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-2.5" />
+                <input
+                  type="text"
+                  value={chapterSearch}
+                  onChange={(e) => setChapterSearch(e.target.value)}
+                  placeholder="Search chapter..."
+                  className="w-full text-xs bg-stone-50 border border-stone-200 rounded-lg pl-8 pr-3 py-2 text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                />
+              </div>
+              <div className="max-h-72 overflow-y-auto space-y-1">
+                {currentBook.chapters
+                  .filter((ch) =>
+                    ch.title.toLowerCase().includes(chapterSearch.toLowerCase()) ||
+                    ch.chapterNumber.toString().includes(chapterSearch)
+                  )
+                  .map((ch) => {
+                    const isSelected = ch.id === currentChapter?.id;
+                    return (
+                      <button
+                        key={ch.id}
+                        onClick={() => {
+                          setSelectedChapterId(ch.id);
+                          setIsMobileChapterListOpen(false);
+                          setChapterSearch('');
+                        }}
+                        className={`w-full p-2.5 rounded-lg border text-left text-xs transition-colors cursor-pointer flex items-center justify-between min-h-[44px] ${
+                          isSelected
+                            ? 'border-amber-400 bg-amber-50 text-stone-900 font-bold'
+                            : 'border-stone-100 hover:bg-stone-50 text-stone-700'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <span className="font-mono text-amber-700 text-[11px] shrink-0">Ch {ch.chapterNumber}</span>
+                          <span className="truncate">{ch.title}</span>
+                        </div>
+                        {isSelected && <Check className="w-3.5 h-3.5 text-amber-600 shrink-0 ml-1" />}
+                      </button>
+                    );
+                  })}
+              </div>
             </div>
           )}
         </div>
@@ -269,12 +342,12 @@ export const NcertPdfLibraryView: React.FC = () => {
                 </div>
 
                 {/* Direct PDF Download / Open Link */}
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
                   <a
                     href={currentChapter.pdfUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold rounded-lg transition-colors shadow-xs"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold rounded-lg transition-colors shadow-xs min-h-[44px]"
                   >
                     <Download className="w-3.5 h-3.5 text-amber-400" />
                     <span>Download Official PDF</span>

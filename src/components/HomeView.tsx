@@ -144,13 +144,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
 
             <form onSubmit={handleHomeSolve} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 <div>
                   <label className="block text-[11px] font-semibold text-stone-600 mb-1">Class</label>
                   <select
                     value={quickClass}
                     onChange={(e) => setQuickClass(e.target.value)}
-                    className="w-full text-xs font-semibold border border-stone-300 rounded-lg px-3 py-2 bg-stone-50 text-stone-800 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                    className="w-full text-base sm:text-xs font-semibold border border-stone-300 rounded-lg px-3 py-2.5 sm:py-2 bg-stone-50 text-stone-800 focus:outline-none focus:ring-1 focus:ring-amber-400"
                   >
                     <option value="Class 12">Class 12</option>
                     <option value="Class 11">Class 11</option>
@@ -166,7 +166,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   <select
                     value={quickSubject}
                     onChange={(e) => setQuickSubject(e.target.value)}
-                    className="w-full text-xs font-semibold border border-stone-300 rounded-lg px-3 py-2 bg-stone-50 text-stone-800 focus:outline-none focus:ring-1 focus:ring-amber-400"
+                    className="w-full text-base sm:text-xs font-semibold border border-stone-300 rounded-lg px-3 py-2.5 sm:py-2 bg-stone-50 text-stone-800 focus:outline-none focus:ring-1 focus:ring-amber-400"
                   >
                     <option value="Science">Science (PCB / General)</option>
                     <option value="Physics">Physics</option>
@@ -179,26 +179,26 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <option value="Sanskrit">Sanskrit (संस्कृतम्)</option>
                   </select>
                 </div>
-                <div className="flex items-end">
+                <div className="sm:col-span-2 md:col-span-1 flex items-end">
                   <span className="text-[11px] text-stone-500 leading-tight">
                     Type or paste any exercise question, reasoning doubt, or numerical.
                   </span>
                 </div>
               </div>
 
-              <div className="relative">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   required
                   value={quickQuestion}
                   onChange={(e) => setQuickQuestion(e.target.value)}
                   placeholder="e.g., A stone of 1 kg is thrown at 20 m/s and comes to rest after 50 m. Find force of friction."
-                  className="w-full text-xs sm:text-sm border border-stone-300 rounded-lg pl-3.5 pr-28 py-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                  className="w-full text-base sm:text-xs border border-stone-300 rounded-lg px-3.5 py-3 sm:py-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-400"
                 />
                 <button
                   type="submit"
                   disabled={isSolving}
-                  className="absolute right-1.5 top-1.5 bottom-1.5 px-3.5 bg-amber-400 hover:bg-amber-300 disabled:opacity-50 text-stone-950 font-bold text-xs rounded-md transition-colors flex items-center gap-1.5 cursor-pointer"
+                  className="w-full sm:w-auto sm:shrink-0 px-5 py-3 sm:py-2.5 bg-amber-400 hover:bg-amber-300 disabled:opacity-50 text-stone-950 font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs min-h-[44px]"
                 >
                   {isSolving ? (
                     <>
@@ -362,7 +362,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
 
         {/* 3. CREATOR & DEVELOPER SIGNATURE CARD */}
-        <div className="bg-gradient-to-br from-stone-900 to-stone-950 text-white rounded-3xl p-8 sm:p-12 border border-stone-800 shadow-md relative overflow-hidden">
+        <div className="bg-gradient-to-br from-stone-900 to-stone-950 text-white rounded-3xl p-5 sm:p-12 border border-stone-800 shadow-md relative overflow-hidden">
           <div className="relative z-10 max-w-3xl space-y-6">
             <div className="flex items-center gap-2 font-brand text-xs font-bold uppercase tracking-wider text-amber-400">
               <UserCheck className="w-4 h-4" />
@@ -374,7 +374,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 Created & Developed by Chinmay Epili
               </h3>
               <p className="font-serif italic text-sm sm:text-base text-stone-200 leading-relaxed border-l-2 border-amber-400 pl-4 py-1">
-                "I created NCERT HELPER with a single, unwavering goal: to ensure every student in Classes 6, 7, 8, and 9 has access to an exceptional, clean study companion. Whether you are stuck on a difficult physics numerical late at night, trying to master a complex biology diagram, or needing instant conceptual clarity without expensive coaching, NCERT HELPER is built for you."
+                "I created NCERT HELPER with a single, unwavering goal: to ensure every student in Classes 6 to 12 has access to an exceptional, clean study companion. Whether you are stuck on a difficult physics numerical late at night, trying to master a complex biology diagram, or needing instant conceptual clarity without expensive coaching, NCERT HELPER is built for you."
               </p>
             </div>
 
@@ -393,7 +393,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
 
         {/* Action Callout to Main Workspaces */}
-        <div className="p-8 bg-stone-50 border border-stone-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+        <div className="p-5 sm:p-8 bg-stone-50 border border-stone-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
           <div className="space-y-1">
             <h4 className="font-display font-bold text-base sm:text-lg text-stone-900">
               Ready to begin your study session?
@@ -403,16 +403,16 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 shrink-0 font-brand">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 shrink-0 font-brand w-full sm:w-auto">
             <button
               onClick={() => setActiveTab('ncert')}
-              className="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs tracking-wide"
+              className="w-full sm:w-auto px-5 py-3 sm:py-2 bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold text-xs rounded-lg transition-colors cursor-pointer shadow-xs tracking-wide min-h-[44px]"
             >
               Open Solutions Workspace
             </button>
             <button
               onClick={() => setActiveTab('timer')}
-              className="px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs rounded-lg transition-colors cursor-pointer tracking-wide"
+              className="w-full sm:w-auto px-5 py-3 sm:py-2 bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs rounded-lg transition-colors cursor-pointer tracking-wide min-h-[44px]"
             >
               Start Focus Timer
             </button>
